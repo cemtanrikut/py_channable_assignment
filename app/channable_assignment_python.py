@@ -43,3 +43,9 @@ class ProductDiffer(ProductStreamProcessor):
         for product_id in before_ids & after_ids:
             if before_products[product_id] != after_products[product_id]:
                 yield (Operation.UPDATE, product_id, after_products[product_id])
+            
+# Instantiate and run the ProductDiffer with provided CSV paths
+if __name__ == '__main__':
+    differ = ProductDiffer('data/product_inventory_before.csv', 'data/product_inventory_after.csv')
+    for operation in differ.main():
+        print(operation)
